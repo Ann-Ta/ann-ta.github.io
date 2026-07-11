@@ -4,19 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asynchronics | Робот-аватар</title> 
-  <!-- link rel="icon" href="logo.png" type="image/png"-->
-<!-- 180x180 - ставим первым для safari -->
   <link rel="icon" href="/icon.png" type="image/png">
-  <link rel="icon" href="/favicon.ico" sizes="any"><!-- 32x32 --> 
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="yandex-tableau-widget" href="/tableau.json">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .lang-switcher {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 999;
+      background: rgba(0,0,0,0.85);
+      padding: 10px 15px;
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid #333;
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .lang-switcher button {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 20px;
+      transition: all 0.3s;
+      font-weight: 600;
+      font-family: sans-serif;
+    }
+    .lang-switcher button.active {
+      color: #fff;
+      background: #3b82f6;
+    }
+    .lang-switcher button:hover {
+      color: #fff;
+    }
+    .lang-content {
+      display: none;
+    }
+    .lang-content.active {
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .lang-switcher {
+        top: 70px;
+        right: 10px;
+        padding: 8px 10px;
+        gap: 3px;
+      }
+      .lang-switcher button {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+    }
+  </style>
 </head>
 <body class="bg-black text-white font-sans">
-  <!-- Шапка -->
+
+<!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ -->
+<div class="lang-switcher">
+  <button class="active" onclick="switchLang('ru')">РУС</button>
+  <button onclick="switchLang('en')">ENG</button>
+  <button onclick="switchLang('vi')">VIE</button>
+  <button onclick="switchLang('ja')">日本語</button>
+  <button onclick="switchLang('zh')">中文</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- РУССКАЯ ВЕРСИЯ                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="lang-ru" class="lang-content active">
   <header class="flex items-center justify-between p-6 bg-black border-b border-gray-800 sticky top-0 z-50">
     <div class="flex items-center gap-3">
       <img src="logo.png" alt="Asynchronics Logo" class="w-10 h-10" />
@@ -29,18 +94,12 @@
       <a href="#contact" class="hover:text-blue-400">Контакты</a>
     </nav>
   </header>
-
-  <!-- Hero: фоновая картинка с наложенным текстом -->
   <section class="relative h-screen w-full bg-cover bg-center" style="background-image: url('robot_hero.jpg');">
     <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-6">
       <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">Робот-аватар</h1>
       <p class="max-w-xl text-gray-300" data-aos="fade-up" data-aos-delay="100">Удалённое управление. Интуитивный контроль. Безопасность человека.</p>
     </div>
   </section>
-
-
-
-  <!-- О проекте -->
   <section id="project" class="py-24 px-6 md:px-24 bg-black">
     <div class="max-w-7xl mx-auto" data-aos="fade-up">
       <h2 class="text-3xl font-bold mb-6">О проекте</h2>
@@ -49,11 +108,7 @@
       </p>
     </div>
   </section>
-
-  <!-- Фото-переход -->
   <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition2.jpg');"></section>
-
-  <!-- Технология -->
   <section id="tech" class="py-24 px-6 md:px-24 bg-gray-900">
     <div class="max-w-7xl mx-auto" data-aos="fade-up">
       <h2 class="text-3xl font-bold mb-6">Технология</h2>
@@ -62,11 +117,7 @@
       </p>
     </div>
   </section>
-
-  <!-- Фото-переход -->
   <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition3.jpg');"></section>
-
-  <!-- Видение будущего -->
   <section id="future" class="py-24 px-6 md:px-24 bg-black">
     <div class="max-w-7xl mx-auto" data-aos="fade-up">
       <h2 class="text-3xl font-bold mb-6">Видение будущего</h2>
@@ -75,67 +126,424 @@
       </p>
     </div>
   </section>
-
-  <!-- Фото-переход -->
-  <!--section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition4.jpg');"></section-->
   <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition4.jpg');"></section>
-  
-  <!-- Новости -->
   <section id="news" class="py-24 px-6 md:px-24 bg-black relative z-10 -mt-32">
-   <div class="max-w-7x1 mx-auto" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-12 text-center">Новости в СМИ</h2>
-     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-	  <!-- Карточка новости -->
-	  <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
-	   <img src="news1.jpg" Alt="Упоминание в СМИ" class="w-full h-48 object-cover">
-	   <div class="p-6">
-	    <h3 class="text-x1 font-semibold mb-2">Студентка МГППУ отправится в экспедицию в Арктику</h3>
-		<p class="text-gray-400 text-sm mb-4">В экспедиции Анна Цыганова определит способы усовершенствования модели робота и проведет исследования для своей дипломной работы.</p>
-		<a href="https://mgppu.ru/news/13094" class="text-blue-400 hover:underline font-semibold">Читать далее</a>
-	   </div>
-	  </div>
-	  <!-- ЕЩЕ новость по шаблону выше -->
-	  	  <!-- Карточка новости -->
-	  <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
-	   <img src="news2.jpg" Alt="Упоминание в СМИ" class="w-full h-48 object-cover">
-	   <div class="p-6">
-	    <h3 class="text-x1 font-semibold mb-2">Какие стартапы нужны рынку и инвесторам в 2023 году?</h3>
-		<p class="text-gray-400 text-sm mb-4">Команда Asynchronics заняла 3 место на международной премии Искусный интеллект в номинации идея года.</p>
-		<a href="https://vc.ru/id1828868/744119-kakie-startapy-nuzhny-rynku-i-investoram-v-2023-godu" class="text-blue-400 hover:underline font-semibold">Читать далее</a>
-	   </div>
-	  </div>
-	  <!-- ЕЩЕ новость по шаблону выше -->
-	  
-	 </div>
-	</div>
-   </section>
-	 </div>
-	</div>
-   </section>
-	 
-  <!-- Контакты -->
+    <div class="max-w-7x1 mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-12 text-center">Новости в СМИ</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news1.jpg" alt="Упоминание в СМИ" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">Студентка МГППУ отправится в экспедицию в Арктику</h3>
+            <p class="text-gray-400 text-sm mb-4">В экспедиции Анна Цыганова определит способы усовершенствования модели робота и проведет исследования для своей дипломной работы.</p>
+            <a href="https://mgppu.ru/news/13094" class="text-blue-400 hover:underline font-semibold">Читать далее</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news2.jpg" alt="Упоминание в СМИ" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">Какие стартапы нужны рынку и инвесторам в 2023 году?</h3>
+            <p class="text-gray-400 text-sm mb-4">Команда Asynchronics заняла 3 место на международной премии Искусный интеллект в номинации идея года.</p>
+            <a href="https://vc.ru/id1828868/744119-kakie-startapy-nuzhny-rynku-i-investoram-v-2023-godu" class="text-blue-400 hover:underline font-semibold">Читать далее</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="contact" class="py-24 px-6 md:px-24 bg-gray-900 text-center">
     <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Контакты</h2>
     <p class="text-gray-400 mb-8" data-aos="fade-up">Напиши нам: <a href="mailto:asynchronics@inbox.ru" class="text-blue-400 hover:underline">asynchronics@inbox.ru</a></p>
-
     <form class="max-w-xl mx-auto space-y-4" data-aos="fade-up" action="https://api.web3forms.com/submit" method="POST">
-	  <input type="hidden" name="access_key" value="3434c3a5-1b52-454b-8ffe-fcee4afde484">
+      <input type="hidden" name="access_key" value="3434c3a5-1b52-454b-8ffe-fcee4afde484">
       <input type="text" name="name" placeholder="Ваше имя" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
       <input type="email" name="email" placeholder="Ваш Email" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
       <textarea name="message" placeholder="Ваше сообщение" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500"></textarea>
       <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded">Отправить</button>
     </form>
-
     <div class="flex justify-center space-x-6 mt-10">
       <a href="https://t.me/asynchronics_channel" target="_blank" class="text-blue-400 hover:text-white">Telegram</a>
       <a href="https://vk.com/club219995893" target="_blank" class="text-pink-400 hover:text-white">Вконтакте</a>
       <a href="https://habr.com/ru/users/AnnTa/" target="_blank" class="text-blue-300 hover:text-white">Habr</a>
-	  <a href="https://www.youtube.com/@asynchronics" target="_blank" class="text-red-300 hover:text-white">YouTube</a>
-	  <!--a href="https://rutube.ru/channel/65483610/" target="_blank" class="text-white hover:text-white">Rutube</a-->
-	  <!--a href="https://dzen.ru/asynchronics" target="_blank" class="text-gray-950 hover:text-black">Дзен</a-->
+      <a href="https://www.youtube.com/@asynchronics" target="_blank" class="text-red-300 hover:text-white">YouTube</a>
     </div>
   </section>
+</div>
 
-  <script>AOS.init();</script>
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- АНГЛИЙСКАЯ ВЕРСИЯ                                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="lang-en" class="lang-content">
+  <header class="flex items-center justify-between p-6 bg-black border-b border-gray-800 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="logo.png" alt="Asynchronics Logo" class="w-10 h-10" />
+      <span class="text-xl font-bold">Asynchronics</span>
+    </div>
+    <nav class="space-x-4 hidden md:block">
+      <a href="#project" class="hover:text-blue-400">About</a>
+      <a href="#tech" class="hover:text-blue-400">Technology</a>
+      <a href="#future" class="hover:text-blue-400">Applications</a>
+      <a href="#contact" class="hover:text-blue-400">Contact</a>
+    </nav>
+  </header>
+  <section class="relative h-screen w-full bg-cover bg-center" style="background-image: url('robot_hero.jpg');">
+    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-6">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">Robot Avatar</h1>
+      <p class="max-w-xl text-gray-300" data-aos="fade-up" data-aos-delay="100">Remote control. Intuitive control. Human safety.</p>
+    </div>
+  </section>
+  <section id="project" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">About the Project</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        We are the Asynchronics team. The goal of the project is to create and successfully test a prototype robot avatar. Remote control of the robot helps reduce risks and ensure workplace safety.
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition2.jpg');"></section>
+  <section id="tech" class="py-24 px-6 md:px-24 bg-gray-900">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">Technology</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        Motion capture technology from a human operator makes control intuitive and sufficiently accurate. The robot follows the operator almost in real time.
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition3.jpg');"></section>
+  <section id="future" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">Vision of the Future</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        We envision a future where robot avatars are used for service, entertainment, exploring hard-to-reach places, data and sample collection, infrastructure monitoring and maintenance, emergency response, and search and rescue operations.
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition4.jpg');"></section>
+  <section id="news" class="py-24 px-6 md:px-24 bg-black relative z-10 -mt-32">
+    <div class="max-w-7x1 mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-12 text-center">Media Coverage</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news1.jpg" alt="Media mention" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">MGPPU Student to Join Arctic Expedition</h3>
+            <p class="text-gray-400 text-sm mb-4">In the expedition, Anna Tsyganova will determine ways to improve the robot model and conduct research for her thesis.</p>
+            <a href="https://mgppu.ru/news/13094" class="text-blue-400 hover:underline font-semibold">Read more</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news2.jpg" alt="Media mention" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">What Startups Do the Market and Investors Need in 2023?</h3>
+            <p class="text-gray-400 text-sm mb-4">The Asynchronics team took 3rd place at the International Skilled Intelligence Award in the Idea of the Year nomination.</p>
+            <a href="https://vc.ru/id1828868/744119-kakie-startapy-nuzhny-rynku-i-investoram-v-2023-godu" class="text-blue-400 hover:underline font-semibold">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="py-24 px-6 md:px-24 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Contact</h2>
+    <p class="text-gray-400 mb-8" data-aos="fade-up">Write to us: <a href="mailto:asynchronics@inbox.ru" class="text-blue-400 hover:underline">asynchronics@inbox.ru</a></p>
+    <form class="max-w-xl mx-auto space-y-4" data-aos="fade-up" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3434c3a5-1b52-454b-8ffe-fcee4afde484">
+      <input type="text" name="name" placeholder="Your name" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <textarea name="message" placeholder="Your message" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500"></textarea>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded">Send</button>
+    </form>
+    <div class="flex justify-center space-x-6 mt-10">
+      <a href="https://t.me/asynchronics_channel" target="_blank" class="text-blue-400 hover:text-white">Telegram</a>
+      <a href="https://vk.com/club219995893" target="_blank" class="text-pink-400 hover:text-white">Vkontakte</a>
+      <a href="https://habr.com/ru/users/AnnTa/" target="_blank" class="text-blue-300 hover:text-white">Habr</a>
+      <a href="https://www.youtube.com/@asynchronics" target="_blank" class="text-red-300 hover:text-white">YouTube</a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ВЬЕТНАМСКАЯ ВЕРСИЯ                               -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="lang-vi" class="lang-content">
+  <header class="flex items-center justify-between p-6 bg-black border-b border-gray-800 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="logo.png" alt="Asynchronics Logo" class="w-10 h-10" />
+      <span class="text-xl font-bold">Asynchronics</span>
+    </div>
+    <nav class="space-x-4 hidden md:block">
+      <a href="#project" class="hover:text-blue-400">Giới thiệu</a>
+      <a href="#tech" class="hover:text-blue-400">Công nghệ</a>
+      <a href="#future" class="hover:text-blue-400">Ứng dụng</a>
+      <a href="#contact" class="hover:text-blue-400">Liên hệ</a>
+    </nav>
+  </header>
+  <section class="relative h-screen w-full bg-cover bg-center" style="background-image: url('robot_hero.jpg');">
+    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-6">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">Robot Avatar</h1>
+      <p class="max-w-xl text-gray-300" data-aos="fade-up" data-aos-delay="100">Điều khiển từ xa. Kiểm soát trực quan. An toàn cho con người.</p>
+    </div>
+  </section>
+  <section id="project" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">Giới thiệu dự án</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        Chúng tôi là nhóm Asynchronics. Mục tiêu của dự án là tạo ra và thử nghiệm thành công nguyên mẫu robot avatar. Điều khiển robot từ xa giúp giảm rủi ro và đảm bảo an toàn tại nơi làm việc.
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition2.jpg');"></section>
+  <section id="tech" class="py-24 px-6 md:px-24 bg-gray-900">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">Công nghệ</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        Công nghệ thu nhận chuyển động từ người vận hành giúp điều khiển trực quan và đủ chính xác. Robot theo dõi người vận hành gần như trong thời gian thực.
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition3.jpg');"></section>
+  <section id="future" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">Tầm nhìn tương lai</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        Chúng tôi hình dung một tương lai nơi robot avatar được sử dụng cho dịch vụ, giải trí, khám phá những nơi khó tiếp cận, thu thập dữ liệu và mẫu vật, giám sát và bảo trì cơ sở hạ tầng, hỗ trợ khẩn cấp và cứu hộ.
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition4.jpg');"></section>
+  <section id="news" class="py-24 px-6 md:px-24 bg-black relative z-10 -mt-32">
+    <div class="max-w-7x1 mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-12 text-center">Tin tức trên truyền thông</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news1.jpg" alt="Tin tức" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">Sinh viên MGPPU tham gia thám hiểm Bắc Cực</h3>
+            <p class="text-gray-400 text-sm mb-4">Trong chuyến thám hiểm, Anna Tsyganova sẽ xác định các cách cải thiện mô hình robot và thực hiện nghiên cứu cho luận văn của mình.</p>
+            <a href="https://mgppu.ru/news/13094" class="text-blue-400 hover:underline font-semibold">Đọc thêm</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news2.jpg" alt="Tin tức" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">Startup nào cần cho thị trường và nhà đầu tư năm 2023?</h3>
+            <p class="text-gray-400 text-sm mb-4">Nhóm Asynchronics đã đạt giải Ba tại Giải thưởng Quốc tế Skilled Intelligence ở hạng mục Ý tưởng của năm.</p>
+            <a href="https://vc.ru/id1828868/744119-kakie-startapy-nuzhny-rynku-i-investoram-v-2023-godu" class="text-blue-400 hover:underline font-semibold">Đọc thêm</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="py-24 px-6 md:px-24 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Liên hệ</h2>
+    <p class="text-gray-400 mb-8" data-aos="fade-up">Viết cho chúng tôi: <a href="mailto:asynchronics@inbox.ru" class="text-blue-400 hover:underline">asynchronics@inbox.ru</a></p>
+    <form class="max-w-xl mx-auto space-y-4" data-aos="fade-up" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3434c3a5-1b52-454b-8ffe-fcee4afde484">
+      <input type="text" name="name" placeholder="Tên của bạn" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <input type="email" name="email" placeholder="Email của bạn" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <textarea name="message" placeholder="Tin nhắn của bạn" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500"></textarea>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded">Gửi</button>
+    </form>
+    <div class="flex justify-center space-x-6 mt-10">
+      <a href="https://t.me/asynchronics_channel" target="_blank" class="text-blue-400 hover:text-white">Telegram</a>
+      <a href="https://vk.com/club219995893" target="_blank" class="text-pink-400 hover:text-white">Vkontakte</a>
+      <a href="https://habr.com/ru/users/AnnTa/" target="_blank" class="text-blue-300 hover:text-white">Habr</a>
+      <a href="https://www.youtube.com/@asynchronics" target="_blank" class="text-red-300 hover:text-white">YouTube</a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ЯПОНСКАЯ ВЕРСИЯ                                  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="lang-ja" class="lang-content">
+  <header class="flex items-center justify-between p-6 bg-black border-b border-gray-800 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="logo.png" alt="Asynchronics Logo" class="w-10 h-10" />
+      <span class="text-xl font-bold">Asynchronics</span>
+    </div>
+    <nav class="space-x-4 hidden md:block">
+      <a href="#project" class="hover:text-blue-400">プロジェクトについて</a>
+      <a href="#tech" class="hover:text-blue-400">テクノロジー</a>
+      <a href="#future" class="hover:text-blue-400">応用分野</a>
+      <a href="#contact" class="hover:text-blue-400">お問い合わせ</a>
+    </nav>
+  </header>
+  <section class="relative h-screen w-full bg-cover bg-center" style="background-image: url('robot_hero.jpg');">
+    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-6">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">ロボットアバター</h1>
+      <p class="max-w-xl text-gray-300" data-aos="fade-up" data-aos-delay="100">遠隔操作。直感的なコントロール。人間の安全。</p>
+    </div>
+  </section>
+  <section id="project" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">プロジェクトについて</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        私たちはAsynchronicsチームです。プロジェクトの目標は、ロボットアバターのプロトタイプを作成し、テストに成功することです。ロボットの遠隔操作はリスクを軽減し、職場の安全を確保するのに役立ちます。
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition2.jpg');"></section>
+  <section id="tech" class="py-24 px-6 md:px-24 bg-gray-900">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">テクノロジー</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        人間のオペレーターからモーションキャプチャー技術により、直感的で十分に正確な制御が可能になります。ロボットはオペレーターにほぼリアルタイムで追従します。
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition3.jpg');"></section>
+  <section id="future" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">未来へのビジョン</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        私たちは、ロボットアバターがサービス、エンターテイメント、危険な場所の探索、データ・サンプル収集、インフラ監視・保守、緊急対応、捜索救助活動に活用される未来を描いています。
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition4.jpg');"></section>
+  <section id="news" class="py-24 px-6 md:px-24 bg-black relative z-10 -mt-32">
+    <div class="max-w-7x1 mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-12 text-center">メディア掲載</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news1.jpg" alt="メディア掲載" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">MGPPUの学生が北極探検に参加</h3>
+            <p class="text-gray-400 text-sm mb-4">探検でアンナ・ツィガノヴァはロボットモデルを改善する方法を決定し、卒業論文の研究を行います。</p>
+            <a href="https://mgppu.ru/news/13094" class="text-blue-400 hover:underline font-semibold">続きを読む</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news2.jpg" alt="メディア掲載" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">2023年に市場と投資家に必要なスタートアップとは？</h3>
+            <p class="text-gray-400 text-sm mb-4">Asynchronicsチームは、国際スキルドインテリジェンス賞の「アイデア・オブ・ザ・イヤー」部門で3位を獲得しました。</p>
+            <a href="https://vc.ru/id1828868/744119-kakie-startapy-nuzhny-rynku-i-investoram-v-2023-godu" class="text-blue-400 hover:underline font-semibold">続きを読む</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="py-24 px-6 md:px-24 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">お問い合わせ</h2>
+    <p class="text-gray-400 mb-8" data-aos="fade-up">お問い合わせ: <a href="mailto:asynchronics@inbox.ru" class="text-blue-400 hover:underline">asynchronics@inbox.ru</a></p>
+    <form class="max-w-xl mx-auto space-y-4" data-aos="fade-up" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3434c3a5-1b52-454b-8ffe-fcee4afde484">
+      <input type="text" name="name" placeholder="お名前" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <input type="email" name="email" placeholder="メールアドレス" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <textarea name="message" placeholder="メッセージ" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500"></textarea>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded">送信</button>
+    </form>
+    <div class="flex justify-center space-x-6 mt-10">
+      <a href="https://t.me/asynchronics_channel" target="_blank" class="text-blue-400 hover:text-white">Telegram</a>
+      <a href="https://vk.com/club219995893" target="_blank" class="text-pink-400 hover:text-white">Vkontakte</a>
+      <a href="https://habr.com/ru/users/AnnTa/" target="_blank" class="text-blue-300 hover:text-white">Habr</a>
+      <a href="https://www.youtube.com/@asynchronics" target="_blank" class="text-red-300 hover:text-white">YouTube</a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- КИТАЙСКАЯ ВЕРСИЯ                                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="lang-zh" class="lang-content">
+  <header class="flex items-center justify-between p-6 bg-black border-b border-gray-800 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="logo.png" alt="Asynchronics Logo" class="w-10 h-10" />
+      <span class="text-xl font-bold">Asynchronics</span>
+    </div>
+    <nav class="space-x-4 hidden md:block">
+      <a href="#project" class="hover:text-blue-400">关于项目</a>
+      <a href="#tech" class="hover:text-blue-400">技术</a>
+      <a href="#future" class="hover:text-blue-400">应用领域</a>
+      <a href="#contact" class="hover:text-blue-400">联系方式</a>
+    </nav>
+  </header>
+  <section class="relative h-screen w-full bg-cover bg-center" style="background-image: url('robot_hero.jpg');">
+    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-6">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">机器人化身</h1>
+      <p class="max-w-xl text-gray-300" data-aos="fade-up" data-aos-delay="100">远程控制。直观控制。人类安全。</p>
+    </div>
+  </section>
+  <section id="project" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">关于项目</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        我们是Asynchronics团队。项目的目标是创建并成功测试机器人化身原型。远程控制机器人有助于降低风险并确保工作场所安全。
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition2.jpg');"></section>
+  <section id="tech" class="py-24 px-6 md:px-24 bg-gray-900">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">技术</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        人体动作捕捉技术使控制直观且足够精确。机器人几乎实时跟随操作员。
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition3.jpg');"></section>
+  <section id="future" class="py-24 px-6 md:px-24 bg-black">
+    <div class="max-w-7xl mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-6">未来愿景</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
+        我们展望未来，机器人化身将用于服务、娱乐、探索难以到达的地方、数据和样本收集、基础设施监控和维护、应急响应以及搜索救援行动。
+      </p>
+    </div>
+  </section>
+  <section class="h-screen w-full bg-cover bg-center" style="background-image: url('robot_transition4.jpg');"></section>
+  <section id="news" class="py-24 px-6 md:px-24 bg-black relative z-10 -mt-32">
+    <div class="max-w-7x1 mx-auto" data-aos="fade-up">
+      <h2 class="text-3xl font-bold mb-12 text-center">媒体报道</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news1.jpg" alt="媒体报道" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">MGPPU学生将参加北极考察</h3>
+            <p class="text-gray-400 text-sm mb-4">在考察中，安娜·齐加诺娃将确定改进机器人模型的方法，并为她的论文进行研究。</p>
+            <a href="https://mgppu.ru/news/13094" class="text-blue-400 hover:underline font-semibold">阅读更多</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-x1 overflow-hidden shadow-lg">
+          <img src="news2.jpg" alt="媒体报道" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-x1 font-semibold mb-2">2023年市场和投资者需要什么样的创业公司？</h3>
+            <p class="text-gray-400 text-sm mb-4">Asynchronics团队在国际技能智能奖"年度创意"提名中获得第三名。</p>
+            <a href="https://vc.ru/id1828868/744119-kakie-startapy-nuzhny-rynku-i-investoram-v-2023-godu" class="text-blue-400 hover:underline font-semibold">阅读更多</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="py-24 px-6 md:px-24 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">联系方式</h2>
+    <p class="text-gray-400 mb-8" data-aos="fade-up">给我们写信: <a href="mailto:asynchronics@inbox.ru" class="text-blue-400 hover:underline">asynchronics@inbox.ru</a></p>
+    <form class="max-w-xl mx-auto space-y-4" data-aos="fade-up" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3434c3a5-1b52-454b-8ffe-fcee4afde484">
+      <input type="text" name="name" placeholder="您的姓名" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <input type="email" name="email" placeholder="您的邮箱" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500">
+      <textarea name="message" placeholder="您的消息" required class="w-full p-3 rounded bg-black border border-gray-700 placeholder-gray-500"></textarea>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded">发送</button>
+    </form>
+    <div class="flex justify-center space-x-6 mt-10">
+      <a href="https://t.me/asynchronics_channel" target="_blank" class="text-blue-400 hover:text-white">Telegram</a>
+      <a href="https://vk.com/club219995893" target="_blank" class="text-pink-400 hover:text-white">Vkontakte</a>
+      <a href="https://habr.com/ru/users/AnnTa/" target="_blank" class="text-blue-300 hover:text-white">Habr</a>
+      <a href="https://www.youtube.com/@asynchronics" target="_blank" class="text-red-300 hover:text-white">YouTube</a>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- СКРИПТЫ                                           -->
+<!-- ═══════════════════════════════════════════════════ -->
+<script>
+  function switchLang(lang) {
+    document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+    document.getElementById('lang-' + lang).classList.add('active');
+    document.querySelectorAll('.lang-switcher button').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
+<script>AOS.init();</script>
 </body>
 </html>
